@@ -9,15 +9,15 @@ import { ErrorUtils } from '$lib/utils/error';
  * Types
  */
 import type { AxiosError } from 'axios';
-import type { IPostsResponse } from '$lib/api/types/response/weather';
+import type { IPostsResponse } from '$lib/api/types/response/posts';
 import type { ISuccessResponse, ServerResponse } from '$lib/api/types/response/utils';
 
 /**
- * Get Posts
- * @description Запрос для получения событий солнца (Sunset, sunrise)
+ * Get All
+ * @description Запрос для получения данных по постам
  * @returns {ServerResponse<IPostsResponse>}
  */
-export function getPosts(): ServerResponse<IPostsResponse> {
+function getAll(): ServerResponse<IPostsResponse> {
 	return catchrequest(
 		api
 			.get('/posts')
@@ -29,8 +29,12 @@ export function getPosts(): ServerResponse<IPostsResponse> {
 				} as ISuccessResponse<IPostsResponse>;
 			}),
 		(error: unknown | AxiosError) => {
-			ErrorUtils.log(error, "API: error from 'getSolarEvents' user");
+			ErrorUtils.log(error, "API: error from 'getAll'");
 			return ErrorUtils.getErrorReason(error);
 		}
 	);
 }
+
+export default {
+	getAll
+};
