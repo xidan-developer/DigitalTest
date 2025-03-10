@@ -20,7 +20,7 @@ import type { ISuccessResponse, ServerResponse } from '$lib/api/types/response/u
 function getAll(): ServerResponse<IPostsResponse> {
 	return catchrequest(
 		api
-			.get('/posts')
+			.get('https://jsonplaceholder.typicode.com/posts')
 			.then(checkokstatus)
 			.then((r) => {
 				return {
